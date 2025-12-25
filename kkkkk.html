@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naveen Edirisinghe | DevSecOps Engineer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #0a0a16; 
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --primary: #6366f1; /* Indigo */
+            --secondary: #06b6d4; /* Cyan */
+            --accent: #f43f5e; /* Rose */
+            --text: #ffffff;
+            --text-dim: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
+        
+        body { 
+            background-color: var(--bg-main); color: var(--text); line-height: 1.6; overflow-x: hidden; position: relative;
+        }
+
+        /* Dynamic Background */
+        body::before, body::after {
+            content: ''; position: fixed; width: 600px; height: 600px; border-radius: 50%;
+            filter: blur(120px); opacity: 0.15; z-index: -1; animation: moveOrb 20s infinite alternate ease-in-out;
+        }
+        body::before { background: var(--primary); top: -10%; left: -20%; }
+        body::after { background: var(--secondary); bottom: -10%; right: -20%; animation-delay: -10s; }
+        
+        @keyframes moveOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Navbar */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(10, 10, 22, 0.7); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; letter-spacing: 1px; }
+        .logo span { background: linear-gradient(to right, var(--secondary), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: var(--text-dim); text-decoration: none; margin-left: 30px; font-size: 0.9rem; transition: 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: var(--secondary); }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 10px 25px;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            transition: 0.3s; margin-left: 30px; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4); }
+        .menu-btn { display: none; font-size: 1.5rem; color: white; cursor: pointer; }
+
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 20px 50px; }
+        .hero h1 {
+            font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800;
+            background: linear-gradient(to right bottom, #fff, #a5b4fc, var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--text-dim); font-size: 1.3rem; max-width: 700px; margin: 0 auto 40px; }
+        
+        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-glow {
+            padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-glow:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
+
+        /* Sections */
+        section { padding: 100px 10%; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header span { color: var(--secondary); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 3px; font-weight: 700; display: block; margin-bottom: 10px; }
+
+        /* Profile */
+        .profile-section { display: flex; align-items: center; gap: 70px; }
+        .profile-img { width: 350px; height: 350px; border-radius: 30px; object-fit: cover; border: 3px solid rgba(255,255,255,0.1); background: #222; }
+        .profile-content h2 { font-size: 2.8rem; margin-bottom: 25px; }
+        
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 35px; }
+        .tag { 
+            background: var(--bg-glass); padding: 10px 20px; border-radius: 50px; 
+            font-size: 0.9rem; color: var(--text); border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px); font-weight: 600;
+        }
+        .tag.highlight { border-color: var(--secondary); color: var(--secondary); box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); }
+        .tag.sec { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(244, 63, 94, 0.2); }
+
+        /* Cards (Services & Projects) */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        
+        .card {
+            background: var(--bg-glass); padding: 35px; border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s ease; position: relative; overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.2); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        
+        .icon-box {
+            width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; display: flex; align-items: center; justify-content: center;
+            border-radius: 16px; margin-bottom: 25px; font-size: 1.5rem;
+        }
+        .card.security .icon-box { background: linear-gradient(135deg, #be123c, var(--accent)); }
+        
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 20px; }
+        .card ul li { margin-bottom: 10px; display: flex; align-items: center; color: var(--text-dim); font-size: 0.9rem; }
+        .card ul li i { color: var(--secondary); margin-right: 10px; }
+
+        /* Contact Form */
+        .contact-container { 
+            max-width: 600px; margin: 0 auto; background: var(--bg-glass); padding: 40px; 
+            border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+        }
+        .form-input { 
+            width: 100%; padding: 15px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 12px; color: white; outline: none; transition: 0.3s; margin-bottom: 20px;
+        }
+        .form-input:focus { border-color: var(--secondary); background: rgba(6, 182, 212, 0.05); }
+        
+        .submit-btn {
+            width: 100%; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 1.1rem;
+        }
+        .submit-btn:hover { transform: scale(1.02); }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-dim); }
+        .social-links a { color: var(--text-dim); font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
+        .social-links a:hover { color: var(--secondary); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .profile-section { flex-direction: column; text-align: center; }
+            .profile-img { width: 280px; height: 280px; }
+            .menu-btn { display: block; }
+            .nav-links {
+                position: absolute; top: 70px; left: 0; width: 100%; background: rgba(10, 10, 22, 0.95);
+                flex-direction: column; padding: 30px; display: none; backdrop-filter: blur(20px);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a, .nav-btn { margin: 15px 0; width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">naveen<span>.dev</span></a>
+        <div class="menu-btn"><i class="fas fa-bars"></i></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Work</a>
+            <a href="#contact">Contact</a>
+            <a href="#contact" class="nav-btn">Hire Me</a>
+        </div>
+    </nav>
+
+    <section class="hero fade-in">
+        <div>
+            <h1>Architecting Secure <br> Digital Experiences.</h1>
+            <p>Full-Stack Developer & Security Researcher. Combining creative design with military-grade security.</p>
+            <div class="cta-group">
+                <a href="#projects" class="btn-glow">View Projects</a>
+                <a href="https://wa.me/94770000000" class="btn-glow" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="fab fa-whatsapp"></i> WhatsApp Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="profile-section fade-in" id="about">
+        <img src="profile.jpg" alt="Naveen Edirisinghe" class="profile-img">
+        
+        <div class="profile-content">
+            <h2>I'm <span style="background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naveen Edirisinghe</span></h2>
+            <p>I don't just build websites; I engineer digital fortresses. As a Full-Stack Developer with a specialization in Cyber Security (DevSecOps), I ensure every project is performant, beautiful, and hacker-proof from day one.</p>
+            
+            <div class="skill-tags">
+                <span class="tag highlight">React & Node.js</span>
+                <span class="tag">PHP / MySQL</span>
+                <span class="tag sec"><i class="fas fa-shield-alt"></i> Ethical Hacking</span>
+                <span class="tag sec">Vulnerability Scanning</span>
+                <span class="tag">Video Production</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-header fade-in">
+            <span>What I Deliver</span>
+            <h2>Elite IT Solutions</h2>
+        </div>
+        <div class="grid">
+            <div class="card fade-in">
+                <div class="icon-box"><i class="fas fa-code"></i></div>
+                <h3>Frontend Engineering</h3>
+                <p>Building lightning-fast, interactive web applications.</p>
+                <ul><li><i class="fas fa-check"></i> React.js / HTML5</li><li><i class="fas fa-check"></i> Advanced Animations</li></ul>
+            </div>
+            <div class="card fade-in" style="transition-delay: 0.2s">
+                <div class="icon-box"><i class="fas fa-server"></i></div>
+                <h3>Robust Backend</h3>
+                <p>Scalable server architecture to handle complex data.</p>
+                <ul><li><i class="fas fa-check"></i> PHP / Node.js API</li><li><i class="fas fa-check"></i> SQL / MongoDB</li></ul>
+            </div>
+            <div class="card security fade-in" style="transition-delay: 0.4s">
+                <div class="icon-box"><i class="fas fa-shield-halved"></i></div>
+                <h3>Cyber Security</h3>
+                <p>Protecting your business assets with proactive security.</p>
+                <ul><li><i class="fas fa-check"></i> Web Pentesting</li><li><i class="fas fa-check"></i> Security Audits</li></ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header fade-in">
+            <span>My Portfolio</span>
+            <h2>Recent Work</h2>
+        </div>
+        <div class="grid">
+            <div class="card fade-in">
+                <div style="height: 150px; background: linear-gradient(45deg, #1e1e2f, #3b82f6); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-graduation-cap" style="font-size: 3rem; color: rgba(255,255,255,0.5);"></i></div>
+                <h3>Student Management System</h3>
+                <p>Full-stack app for managing student data. Built with React.js and SQL.</p>
+            </div>
+            <div class="card fade-in" style="transition-delay: 0.2s">
+                 <div style="height: 150px; background: linear-gradient(45deg, #1e1e2f, #10b981); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-cricket" style="font-size: 3rem; color: rgba(255,255,255,0.5);"></i></div>
+                <h3>'Bad Wolf' Branding</h3>
+                <p>Visual identity, Logos, and Player Cards for ATI Cricket Tournament.</p>
+            </div>
+            <div class="card fade-in" style="transition-delay: 0.4s">
+                 <div style="height: 150px; background: linear-gradient(45deg, #1e1e2f, #f43f5e); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-globe" style="font-size: 3rem; color: rgba(255,255,255,0.5);"></i></div>
+                <h3>Personal Portfolio</h3>
+                <p>This website. Built with Neon Glassmorphism and PHP backend.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header fade-in">
+            <span>Get In Touch</span>
+            <h2>Start Your Project</h2>
+        </div>
+        
+        <div class="contact-container fade-in">
+            <form action="contact.php" method="POST">
+                <input type="text" class="form-input" name="name" placeholder="Your Name" required>
+                <input type="email" class="form-input" name="email" placeholder="Your Email" required>
+                <textarea class="form-input" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                <button type="submit" class="submit-btn">Send Secure Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <p style="margin-top: 20px;">&copy; 2025 Naveen Edirisinghe. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Menu & Scroll Logic
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
